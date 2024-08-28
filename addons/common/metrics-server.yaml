@@ -49,8 +49,6 @@ spec:
       requests:
         cpu: 250m
         memory: 256Mi
-    nodeSelector:
-      node.ccom.io/role: system-tools
     topologySpreadConstraints:
       - maxSkew: 1
         topologyKey: topology.kubernetes.io/zone
