@@ -31,7 +31,7 @@ spec:
         kind: HelmRepository
         name: jetstack  
   releaseName: cert-manager
-  targetNamespace: system-tools
+  targetNamespace: cert-manager
   values:
     crds:
       enabled: true
@@ -62,6 +62,4 @@ spec:
         kind: HelmRepository
         name: jetstack 
   releaseName: trust-manager
-  targetNamespace: system-tools
-  values:
-    namespace: system-tools
+  targetNamespace: cert-manager
