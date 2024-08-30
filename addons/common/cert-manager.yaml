@@ -1,0 +1,65 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: jetstack
+  namespace: flux-system
+spec:
+  interval: 24h
+  url: https://charts.jetstack.io
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: cert-manager
+  namespace: flux-system
+spec:
+  interval: 1h
+  timeout: 5m
+  install:
+    crds: CreateReplace
+    remediation:
+      retries: 5
+  upgrade:
+    crds: CreateReplace
+    remediation:
+      retries: 5
+  chart:
+    spec:
+      chart: cert-manager
+      version: v1.15.*
+      sourceRef:
+        kind: HelmRepository
+        name: jetstack  
+  releaseName: cert-manager
+  targetNamespace: system-tools
+  values:
+    crds:
+      enabled: true
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: trust-manager
+  namespace: flux-manager
+spec:
+  dependsOn:
+    - name: cert-manager
+  interval: 1h
+  timeout: 5m
+  install:
+    crds: CreateReplace
+    remediation:
+      retries: 5
+  upgrade:
+    crds: CreateReplace
+    remediation:
+      retries: 5
+  chart:
+    spec:
+      chart: trust-manager
+      version: v0.12.*
+      sourceRef:
+        kind: HelmRepository
+        name: jetstack 
+  releaseName: trust-manager
+  targetNamespace: system-tools
