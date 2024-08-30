@@ -63,3 +63,5 @@ spec:
         name: jetstack 
   releaseName: trust-manager
   targetNamespace: system-tools
+  values:
+    namespace: system-tools
