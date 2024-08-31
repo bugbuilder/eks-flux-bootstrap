@@ -50,22 +50,22 @@ spec:
       issuer:
         scheme: kubernetes.io/tls
     # -- Create PodDisruptionBudget resources for each control plane workload
-    enablePodDisruptionBudget: true
+    # enablePodDisruptionBudget: true
     
-    controller:
-      # -- sets pod disruption budget parameter for all deployments
-      podDisruptionBudget:
-        # -- Maximum number of pods that can be unavailable during disruption
-        maxUnavailable: 1
+    # controller:
+    #   # -- sets pod disruption budget parameter for all deployments
+    #   podDisruptionBudget:
+    #     # -- Maximum number of pods that can be unavailable during disruption
+    #     maxUnavailable: 1
     
     # -- Specify a deployment strategy for each control plane workload
-    deploymentStrategy:
-      rollingUpdate:
-        maxUnavailable: 1
-        maxSurge: 25%
+    # deploymentStrategy:
+    #   rollingUpdate:
+    #     maxUnavailable: 1
+    #     maxSurge: 25%
     
     # -- add PodAntiAffinity to each control plane workload
-    enablePodAntiAffinity: true
+    # enablePodAntiAffinity: true
     
     # nodeAffinity:
     
@@ -79,7 +79,7 @@ spec:
           request: 20Mi
     
     # controller configuration
-    controllerReplicas: 3
+    # controllerReplicas: 3
     controllerResources: &controller_resources
       cpu: &controller_resources_cpu
         limit: ""
@@ -106,6 +106,6 @@ spec:
     # service profile validator configuration
     spValidatorResources: *controller_resources
     
-    # flag for linkerd check
-    highAvailability: true
+    # # flag for linkerd check
+    # highAvailability: true
         
