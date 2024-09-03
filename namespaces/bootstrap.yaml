@@ -16,4 +16,13 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: linkerd-smi
+  annotations:
+    linkerd.io/inject: enabled
+  name: linkerd-viz
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    linkerd.io/inject: enabled
+  name: flagger-system
