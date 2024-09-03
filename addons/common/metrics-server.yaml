@@ -32,7 +32,7 @@ spec:
   releaseName: metrics-server
   targetNamespace: system-tools
   values:
-    replicas: 2
+    replicas: 1
     podLabels:
       eks-addon-name: metrics-server
     updateStrategy:
