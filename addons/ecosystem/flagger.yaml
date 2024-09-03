@@ -33,6 +33,7 @@ spec:
   targetNamespace: flagger-system
   values:
     meshProvider: gatewayapi:v1beta1
+    selectorLabels: service,app,name,app.kubernetes.io/name
     metricsServer: http://prometheus.linkerd-viz:9090
     linkerdAuthPolicy:
       create: true
