@@ -24,9 +24,6 @@ spec:
         name: linkerd-edge  
   releaseName: linkerd-crds
   targetNamespace: linkerd
-  values:
-    # https://github.com/linkerd/linkerd2/issues/12232
-    enableHttpRoutes: false
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
