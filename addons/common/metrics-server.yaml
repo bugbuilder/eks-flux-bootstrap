@@ -32,27 +32,10 @@ spec:
   releaseName: metrics-server
   targetNamespace: system-tools
   values:
-    replicas: 1
-    podLabels:
-      eks-addon-name: metrics-server
-    updateStrategy:
-      type: RollingUpdate
-      rollingUpdate:
-        maxUnavailable: 1
     args:
+      - --cert-dir=/tmp
+      - --secure-port=443
+      - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+      - --kubelet-use-node-status-port
+      - --metric-resolution=15s
       - --kubelet-insecure-tls=true
-      - --kubelet-preferred-address-types=InternalIP,Hostname,InternalDNS,ExternalDNS,ExternalIP
-    resources:
-      limits:
-        cpu: 1
-        memory: 1Gi
-      requests:
-        cpu: 250m
-        memory: 256Mi
-    topologySpreadConstraints:
-      - maxSkew: 1
-        topologyKey: topology.kubernetes.io/zone
-        whenUnsatisfiable: DoNotSchedule
-        labelSelector:
-        matchLabels:
-          eks-addon-name: metrics-server
