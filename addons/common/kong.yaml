@@ -17,7 +17,6 @@ spec:
     - name: ingress-nginx
   interval: 1h
   timeout: 5m
-  targetNamespace: kong
   install:
     remediation:
       retries: 5
@@ -31,7 +30,8 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: kong
-  releaseName: kic-public
+  releaseName: kong
+  targetNamespace: kong
   values:
     controller:
       ingressController:
@@ -47,9 +47,9 @@ spec:
     gateway:
       resources: *default_resources
       proxy:
-        type: NodePort
-        http:
-          nodePort: 32081
+        type: ClusterIP
+        # http:
+        #   nodePort: 32081
         tls:
           enabled: false
         ingress:
