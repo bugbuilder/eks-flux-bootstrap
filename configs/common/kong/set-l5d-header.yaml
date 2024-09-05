@@ -1,0 +1,12 @@
+apiVersion: configuration.konghq.com/v1
+kind: KongClusterPlugin
+metadata:
+  name: set-l5d-header
+plugin: request-transformer
+config:
+  remove:
+    headers:
+    - l5d-dst-override # Prevents open relay
+  add:
+    headers:
+    - l5d-dst-override:$(headers.host).svc.cluster.local

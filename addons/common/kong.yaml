@@ -40,17 +40,17 @@ spec:
         installCRDs: false
     gateway:
       proxy:
-        type: ClusterIP
-        # http:
-        #   nodePort: 32081
+        type: NodePort
+        http:
+          nodePort: 32081
         tls:
           enabled: false
         ingress:
           pathType: Prefix
-          enabled: true
+          enabled: false
           ingressClassName: nginx
           annotations:
-            nginx.ingress.kubernetes.io/service-upstream: "true"
+            # nginx.ingress.kubernetes.io/service-upstream: "true"
             # alb.ingress.kubernetes.io/load-balancer-name: 'kic-public'
             # alb.ingress.kubernetes.io/group.name: 'kic-public'
             # alb.ingress.kubernetes.io/group.order: '1'
