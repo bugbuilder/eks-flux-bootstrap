@@ -1,0 +1,24 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: GitRepository
+metadata:
+  name: kong-charts
+  namespace: kube-system
+spec:
+  interval: 48h
+  ref:
+    branch: ingress-0.14.0
+  url: https://github.com/Kong/charts
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: aws-load-balancer-controller-crds
+  namespace: kube-system
+spec:
+  interval: 48h
+  path: charts/kong/crds
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: kong-charts

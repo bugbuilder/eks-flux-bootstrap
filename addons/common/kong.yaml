@@ -37,8 +37,7 @@ spec:
   values:
     controller:
       ingressController:
-        installCRDs: true
-        ingressClass: kong
+        installCRDs: false
         resources: &default_resources
           limits:
             cpu: "700m"
