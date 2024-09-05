@@ -28,7 +28,7 @@ spec:
   chart:
     spec:
       chart: ingress
-      version: ">=0.13.*"
+      version: "0.14.0"
       sourceRef:
         kind: HelmRepository
         name: kong
@@ -38,15 +38,7 @@ spec:
     controller:
       ingressController:
         installCRDs: false
-        resources: &default_resources
-          limits:
-            cpu: "700m"
-            memory: "1000Mi"
-          requests:
-            cpu: "200m"
-            memory: "800Mi"
     gateway:
-      resources: *default_resources
       proxy:
         type: ClusterIP
         # http:
