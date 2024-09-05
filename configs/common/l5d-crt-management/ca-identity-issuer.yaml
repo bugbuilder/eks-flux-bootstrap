@@ -12,8 +12,8 @@ spec:
   - crl sign
   - server auth
   - client auth
-  duration: 48h
-  renewBefore: 25h
+  duration: 1h # testing
+  # renewBefore: 25h
   privateKey:
     algorithm: ECDSA
     size: 256
