@@ -54,6 +54,8 @@ spec:
           enabled: false
         ingress:
           pathType: Prefix
+          enabled: true
+          ingressClassName: nginx
           annotations:
             nginx.ingress.kubernetes.io/service-upstream: "true"
             # alb.ingress.kubernetes.io/load-balancer-name: 'kic-public'
@@ -79,7 +81,3 @@ spec:
         nginx_http_large_client_header_buffers: "8 24k"
         headers: "off"
         trusted_ips: "0.0.0.0/0,::/0"
-  valuesFrom:
-    - kind: ConfigMap
-      name: flux-addons-bootstrap-values
-      valuesKey: kong-public.yaml
