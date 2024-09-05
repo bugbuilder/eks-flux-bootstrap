@@ -5,9 +5,9 @@ metadata:
   name: kong-charts
   namespace: kube-system
 spec:
-  interval: 48h
+  interval: 720h
   ref:
-    branch: ingress-0.14.0
+    tag: ingress-0.14.0
   url: https://github.com/Kong/charts
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -16,7 +16,7 @@ metadata:
   name: aws-load-balancer-controller-crds
   namespace: kube-system
 spec:
-  interval: 48h
+  interval: 720h
   path: charts/kong/crds
   prune: true
   sourceRef:
