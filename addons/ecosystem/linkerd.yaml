@@ -35,6 +35,12 @@ spec:
     - name: linkerd-crds
   interval: 1h
   timeout: 5m
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
   chart:
     spec:
       chart: linkerd-control-plane
