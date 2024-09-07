@@ -35,12 +35,12 @@ spec:
   releaseName: kong
   targetNamespace: kong
   values:
+    podAnnotations:
+      linkerd.io/inject: ingress
     controller:
       ingressController:
         installCRDs: false
     gateway:
-      podAnnotations:
-        linkerd.io/inject: ingress
       proxy:
         type: NodePort
         http:
