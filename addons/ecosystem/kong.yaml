@@ -14,7 +14,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: ingress-nginx
+    - name: linkerd-control-plane
   interval: 1h
   timeout: 5m
   install:
@@ -35,6 +35,8 @@ spec:
   releaseName: kong
   targetNamespace: kong
   values:
+    podAnnotations:
+      linkerd.io/inject: ingress
     controller:
       ingressController:
         installCRDs: false

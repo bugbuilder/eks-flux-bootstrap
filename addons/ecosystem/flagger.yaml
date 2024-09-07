@@ -13,6 +13,8 @@ metadata:
   name: flagger
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: linkerd-control-plane
   interval: 1h
   timeout: 5m
   install:

@@ -13,6 +13,8 @@ metadata:
   name: ingress-nginx
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: linkerd-control-plane
   interval: 30m
   chart:
     spec:
@@ -34,5 +36,6 @@ spec:
       metrics:
         enabled: true
       podAnnotations:
+        linkerd.io/inject: enabled
         prometheus.io/port: "10254"
         prometheus.io/scrape: "true"
