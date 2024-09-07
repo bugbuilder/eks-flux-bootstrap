@@ -49,7 +49,7 @@ spec:
           enabled: false
         ingress:
           pathType: Prefix
-          enabled: false
+          enabled: true
           ingressClassName: alb
           annotations:
             alb.ingress.kubernetes.io/load-balancer-name: 'kic-public'
