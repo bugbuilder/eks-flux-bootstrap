@@ -4,8 +4,8 @@ metadata:
   name: set-l5d-header
   annotations:
     kubernetes.io/ingress.class: kong
-  labels:
-    global: "true"
+  # labels:
+  #   global: "true"
 plugin: request-transformer
 config:
   remove:
