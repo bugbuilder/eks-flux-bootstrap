@@ -14,7 +14,8 @@ metadata:
 spec:
   ingressClassName: kong
   rules:
-  - http:
+  - host: api.stg.bugbuilder.xyz
+    http:
       paths:
         - path: /echoserver
           pathType: Exact
