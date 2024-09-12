@@ -33,7 +33,7 @@ spec:
   targetNamespace: kube-system
   values:
     extraArgs:
-      - aws-prefer-cname
+      - --aws-prefer-cname
     domainFilters:
       - stg.bugbuilder.xyz
     serviceAccount:
