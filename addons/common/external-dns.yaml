@@ -1,0 +1,57 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: external-dns
+  namespace: kube-system
+spec:
+  url: https://kubernetes-sigs.github.io/external-dns/
+  interval: 1h
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: external-dns
+  namespace: kube-system
+spec:
+  interval: 1h
+  timeout: 5m
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  chart:
+    spec:
+      chart: external-dns
+      version: ">=1.14"
+      sourceRef:
+        kind: HelmRepository
+        name: external-dns
+  releaseName: external-dns
+  targetNamespace: system-tools
+  values:
+    domainFilters:
+      - "stg.bugbuilder.xyz"
+    serviceAccount:
+      annotations:
+        eks.amazonaws.com/role-arn: arn:aws:iam::873841524148:role/external-dns
+      name: external-dns
+    txtOwnerId: ManagedByExternalDNSForCluster-lucas
+    sources:
+      - ingress
+    triggerLoopOnEvent: true
+    annotationFilter: external-dns.alpha.kubernetes.io/exclude notin (true)
+    aws:
+      zoneType: public
+    resources:
+      requests:
+        cpu: 100m
+        memory: 100Mi
+      limits:
+        cpu: 200m
+        memory: 200Mi
+    podLabels:
+      eks-addon-name: external-dns
+    policy: sync

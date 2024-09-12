@@ -21,6 +21,11 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
+  name: kyverno
+---
+apiVersion: v1
+kind: Namespace
+metadata:
   labels:
     linkerd.io/extension: viz
   name: linkerd-viz
