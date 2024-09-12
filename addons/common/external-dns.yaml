@@ -32,8 +32,10 @@ spec:
   releaseName: external-dns
   targetNamespace: kube-system
   values:
+    extraArgs:
+      - aws-prefer-cname
     domainFilters:
-      - "stg.bugbuilder.xyz"
+      - stg.bugbuilder.xyz
     serviceAccount:
       annotations:
         eks.amazonaws.com/role-arn: arn:aws:iam::873841524148:role/external-dns
