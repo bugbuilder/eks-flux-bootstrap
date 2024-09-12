@@ -30,7 +30,7 @@ spec:
         kind: HelmRepository
         name: external-dns
   releaseName: external-dns
-  targetNamespace: system-tools
+  targetNamespace: kube-system
   values:
     domainFilters:
       - "stg.bugbuilder.xyz"
