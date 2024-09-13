@@ -11,7 +11,7 @@ metadata:
   namespace: echoserver
   annotations:
     # external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
-    external-dns.alpha.kubernetes.io/target: https://d2vu03vtpql8oe.cloudfront.net
+    external-dns.alpha.kubernetes.io/target: d2vu03vtpql8oe.cloudfront.net
     external-dns.alpha.kubernetes.io/alias: true
     konghq.com/strip-path: true
 spec:
