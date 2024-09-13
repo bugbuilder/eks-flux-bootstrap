@@ -12,7 +12,7 @@ spec:
   - crl sign
   - server auth
   - client auth
-  duration: 5m # testing
+  duration: 15m # testing
   # renewBefore: 25h
   privateKey:
     algorithm: ECDSA
