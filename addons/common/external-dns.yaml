@@ -35,7 +35,7 @@ spec:
     extraArgs:
       - --aws-prefer-cname
     domainFilters:
-      - stg.bugbuilder.xyz
+      - bugbuilder.xyz
     serviceAccount:
       annotations:
         eks.amazonaws.com/role-arn: arn:aws:iam::873841524148:role/external-dns
