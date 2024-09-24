@@ -1,75 +1,75 @@
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
-metadata:
-  name: kong
-  namespace: flux-system
-spec:
-  url: https://charts.konghq.com
-  interval: 1h
----
-apiVersion: helm.toolkit.fluxcd.io/v2
-kind: HelmRelease
-metadata:
-  name: kong
-  namespace: flux-system
-spec:
-  dependsOn:
-    - name: linkerd-control-plane
-  interval: 1h
-  timeout: 5m
-  install:
-    crds: CreateReplace
-    remediation:
-      retries: 5
-  upgrade:
-    crds: CreateReplace
-    remediation:
-      retries: 5
-  chart:
-    spec:
-      chart: ingress
-      version: "0.14.0"
-      sourceRef:
-        kind: HelmRepository
-        name: kong
-  releaseName: kong
-  targetNamespace: kong
-  values:
-    controller:
-      ingressController:
-        installCRDs: false
-    gateway:
-      podAnnotations:
-        linkerd.io/inject: ingress
-      proxy:
-        type: NodePort
-        http:
-          nodePort: 32081
-        tls:
-          enabled: false
-        ingress:
-          pathType: Prefix
-          enabled: true
-          ingressClassName: alb
-          annotations:
-            alb.ingress.kubernetes.io/load-balancer-name: 'kic-public'
-            alb.ingress.kubernetes.io/group.name: 'kic-public'
-            alb.ingress.kubernetes.io/group.order: '1'
-            alb.ingress.kubernetes.io/ip-address-type: 'ipv4'
-            alb.ingress.kubernetes.io/backend-protocol: 'HTTP'
-            alb.ingress.kubernetes.io/target-type: 'instance'
-            alb.ingress.kubernetes.io/scheme: 'internet-facing'
-            alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
-            alb.ingress.kubernetes.io/shield-advanced-protection: 'true'
-            alb.ingress.kubernetes.io/healthcheck-port: traffic-port
-            alb.ingress.kubernetes.io/healthcheck-path: /echoserver
-            alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
-            alb.ingress.kubernetes.io/healthcheck-interval-seconds: '60'
-            alb.ingress.kubernetes.io/success-codes: "200"
-            alb.ingress.kubernetes.io/target-group-attributes: "deregistration_delay.timeout_seconds=30,load_balancing.algorithm.type=least_outstanding_requests"
-      env:
-        router_flavor: expressions
-        nginx_http_client_body_buffer_size: "24k"
-        nginx_http_large_client_header_buffers: "8 24k"
-        headers: "off"
-        trusted_ips: "0.0.0.0/0,::/0"
+# apiVersion: source.toolkit.fluxcd.io/v1
+# kind: HelmRepository
+# metadata:
+#   name: kong
+#   namespace: flux-system
+# spec:
+#   url: https://charts.konghq.com
+#   interval: 1h
+# ---
+# apiVersion: helm.toolkit.fluxcd.io/v2
+# kind: HelmRelease
+# metadata:
+#   name: kong
+#   namespace: flux-system
+# spec:
+#   dependsOn:
+#     - name: linkerd-control-plane
+#   interval: 1h
+#   timeout: 5m
+#   install:
+#     crds: CreateReplace
+#     remediation:
+#       retries: 5
+#   upgrade:
+#     crds: CreateReplace
+#     remediation:
+#       retries: 5
+#   chart:
+#     spec:
+#       chart: ingress
+#       version: "0.14.0"
+#       sourceRef:
+#         kind: HelmRepository
+#         name: kong
+#   releaseName: kong
+#   targetNamespace: kong
+#   values:
+#     controller:
+#       ingressController:
+#         installCRDs: false
+#     gateway:
+#       podAnnotations:
+#         linkerd.io/inject: ingress
+#       proxy:
+#         type: NodePort
+#         http:
+#           nodePort: 32081
+#         tls:
+#           enabled: false
+#         ingress:
+#           pathType: Prefix
+#           enabled: true
+#           ingressClassName: alb
+#           annotations:
+#             alb.ingress.kubernetes.io/load-balancer-name: 'kic-public'
+#             alb.ingress.kubernetes.io/group.name: 'kic-public'
+#             alb.ingress.kubernetes.io/group.order: '1'
+#             alb.ingress.kubernetes.io/ip-address-type: 'ipv4'
+#             alb.ingress.kubernetes.io/backend-protocol: 'HTTP'
+#             alb.ingress.kubernetes.io/target-type: 'instance'
+#             alb.ingress.kubernetes.io/scheme: 'internet-facing'
+#             alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+#             alb.ingress.kubernetes.io/shield-advanced-protection: 'true'
+#             alb.ingress.kubernetes.io/healthcheck-port: traffic-port
+#             alb.ingress.kubernetes.io/healthcheck-path: /echoserver
+#             alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
+#             alb.ingress.kubernetes.io/healthcheck-interval-seconds: '60'
+#             alb.ingress.kubernetes.io/success-codes: "200"
+#             alb.ingress.kubernetes.io/target-group-attributes: "deregistration_delay.timeout_seconds=30,load_balancing.algorithm.type=least_outstanding_requests"
+#       env:
+#         router_flavor: expressions
+#         nginx_http_client_body_buffer_size: "24k"
+#         nginx_http_large_client_header_buffers: "8 24k"
+#         headers: "off"
+#         trusted_ips: "0.0.0.0/0,::/0"
