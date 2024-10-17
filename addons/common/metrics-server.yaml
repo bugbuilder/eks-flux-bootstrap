@@ -1,39 +1,39 @@
----
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
-metadata:
-  name: metrics-server
-  namespace: flux-system
-spec:
-  url: https://kubernetes-sigs.github.io/metrics-server/
-  interval: 1h
----
-apiVersion: helm.toolkit.fluxcd.io/v2
-kind: HelmRelease
-metadata:
-  name: metrics-server
-  namespace: flux-system
-spec:
-  interval: 1h
-  timeout: 5m
-  install:
-    remediation:
-      retries: 5
-  upgrade:
-    remediation:
-      retries: 5
-  chart:
-    spec:
-      chart: metrics-server
-      version: 3.12.*
-      sourceRef:
-        kind: HelmRepository
-        name: metrics-server
-  releaseName: metrics-server
-  targetNamespace: system-tools
-  values:
-    args:
-      - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
-      - --kubelet-use-node-status-port
-      - --metric-resolution=15s
-      - --kubelet-insecure-tls=true
+# ---
+# apiVersion: source.toolkit.fluxcd.io/v1
+# kind: HelmRepository
+# metadata:
+#   name: metrics-server
+#   namespace: flux-system
+# spec:
+#   url: https://kubernetes-sigs.github.io/metrics-server/
+#   interval: 1h
+# ---
+# apiVersion: helm.toolkit.fluxcd.io/v2
+# kind: HelmRelease
+# metadata:
+#   name: metrics-server
+#   namespace: flux-system
+# spec:
+#   interval: 1h
+#   timeout: 5m
+#   install:
+#     remediation:
+#       retries: 5
+#   upgrade:
+#     remediation:
+#       retries: 5
+#   chart:
+#     spec:
+#       chart: metrics-server
+#       version: 3.12.*
+#       sourceRef:
+#         kind: HelmRepository
+#         name: metrics-server
+#   releaseName: metrics-server
+#   targetNamespace: system-tools
+#   values:
+#     args:
+#       - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+#       - --kubelet-use-node-status-port
+#       - --metric-resolution=15s
+#       - --kubelet-insecure-tls=true
