@@ -13,8 +13,8 @@ metadata:
   name: ingress-nginx
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: linkerd-control-plane
+  # dependsOn:
+  #   - name: linkerd-control-plane
   interval: 30m
   chart:
     spec:

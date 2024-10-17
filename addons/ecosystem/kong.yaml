@@ -38,6 +38,9 @@ spec:
     controller:
       image:
         tag: "3.8.0"
+      ingressController:
+        image:
+          tag: "3.3.1"
     gateway:
       image:
         tag: "3.8.0"
